@@ -1,28 +1,37 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const twilio = require("twilio");
+const nodemailer = require("nodemailer");
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname));
 
-const ACCOUNT_SID = "PUT_SID";
-const AUTH_TOKEN  = "PUT_TOKEN";
-const TWILIO_NUM  = "+1XXXXXXXXXX";     // رقم Twilio
-const OWNER_NUM   = "+9665XXXXXXXX";    // رقمك
+// إيميلك
+const OWNER_EMAIL = "battal.alzahrani23@gmail.com";
 
-const client = new twilio(ACCOUNT_SID, AUTH_TOKEN);
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: "battal.alzahrani23@gmail.com",
+    pass: "APP_PASSWORD" // هنا تحط App Password من Google
+  }
+});
 
 app.post("/apply", (req, res) => {
-  const msg = `لاعب جديد 🎮\nالاسم: ${req.body.player}`;
+  const mail = {
+    from: "Form Bot",
+    to: OWNER_EMAIL,
+    subject: "لاعب جديد",
+    text: `تم تسجيل لاعب جديد:\nالاسم: ${req.body.player}`
+  };
 
-  client.messages.create({
-    body: msg,
-    from: TWILIO_NUM,
-    to: OWNER_NUM
+  transporter.sendMail(mail, (err, info) => {
+    if (err) {
+      console.log(err);
+      return res.send("صار خطأ ❌");
+    }
+    res.send("تم الإرسال بنجاح ✅");
   });
-
-  res.send("تم الإرسال بنجاح ✅");
 });
 
 app.listen(3000, () => {
