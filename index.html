@@ -2,20 +2,20 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>Roblox Style Page</title>
+<title>Roblox Style</title>
 
 <style>
 body{
   margin:0;
   font-family:Arial, sans-serif;
-  background:#000;
+  background:url("bg.jpg") no-repeat center center/cover;
   color:white;
 }
 
 /* Top Bar */
 .topbar{
-  background:#111;
-  height:50px;
+  background:rgba(15,15,15,0.85);
+  height:55px;
   display:flex;
   align-items:center;
   padding:0 15px;
@@ -28,26 +28,33 @@ body{
 
 .menu a{
   color:white;
-  margin:0 8px;
+  margin:0 10px;
   text-decoration:none;
   font-size:14px;
 }
 
 .search{
-  margin-left:auto;
+  margin:auto;
 }
 
 .search input{
-  padding:5px;
-  border-radius:4px;
+  width:350px;
+  padding:7px 12px;
   border:none;
+  border-radius:6px;
+  background:#000;
+  color:white;
+}
+
+.search input::placeholder{
+  color:#ccc;
 }
 
 .btn-blue{
   background:#1f7aff;
   color:white;
-  padding:6px 12px;
-  border-radius:5px;
+  padding:7px 14px;
+  border-radius:6px;
   margin-left:10px;
   text-decoration:none;
 }
@@ -55,15 +62,15 @@ body{
 .btn-dark{
   background:#333;
   color:white;
-  padding:6px 12px;
-  border-radius:5px;
+  padding:7px 14px;
+  border-radius:6px;
   margin-left:8px;
   text-decoration:none;
 }
 
-/* Login Box */
+/* Center Box */
 .center{
-  height:calc(100vh - 50px);
+  height:calc(100vh - 55px);
   display:flex;
   justify-content:center;
   align-items:center;
@@ -73,21 +80,28 @@ body{
   background:#202225;
   padding:30px;
   width:340px;
-  border-radius:10px;
+  border-radius:12px;
   text-align:center;
+  box-shadow:0 0 25px rgba(0,0,0,0.9);
 }
 
-.box input, .box button{
+.box input{
   width:100%;
-  padding:10px;
+  padding:11px;
   margin:8px 0;
   border:none;
-  border-radius:5px;
+  border-radius:6px;
 }
 
 .box button{
+  width:100%;
+  padding:11px;
+  margin-top:12px;
   background:#00b06f;
+  border:none;
   color:white;
+  font-size:16px;
+  border-radius:6px;
   cursor:pointer;
 }
 </style>
