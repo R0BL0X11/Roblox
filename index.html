@@ -1,28 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>Login Test</title>
+<title>Login</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  font-family:Arial, sans-serif;
+  background:#0f0f0f;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.box{
+  background:#1f1f1f;
+  padding:30px;
+  width:320px;
+  border-radius:12px;
+  text-align:center;
+  color:white;
+  box-shadow:0 0 20px rgba(0,0,0,0.7);
+}
+
+.box h2{margin-bottom:20px;}
+
+.box input{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border:none;
+  border-radius:6px;
+}
+
+.box button{
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  background:#00b06f;
+  border:none;
+  color:white;
+  font-size:16px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.box button:hover{
+  background:#00965f;
+}
+</style>
 </head>
 <body>
 
-<h2>Login</h2>
-
-<form id="loginForm">
-  <input type="email" id="email" placeholder="Email" required><br><br>
-  <input type="password" id="password" placeholder="Password" required><br><br>
-  <button type="submit">Log in</button>
-</form>
+<div class="box">
+  <h2>تسجيل الدخول</h2>
+  <input type="text" id="user" placeholder="اسم المستخدم / الإيميل">
+  <input type="password" id="pass" placeholder="كلمة المرور">
+  <button onclick="login()">Log in</button>
+</div>
 
 <script>
-document.getElementById("loginForm").addEventListener("submit", function(e) {
-  e.preventDefault(); // يمنع إعادة تحميل الصفحة
+function login(){
+  let u = document.getElementById("user").value;
+  let p = document.getElementById("pass").value;
 
-  let email = document.getElementById("email").value;
-  let password = document.getElementById("password").value;
-
-  alert("Email: " + email + "\nPassword: " + password);
-});
+  alert("Username: " + u + "\nPassword: " + p);
+}
 </script>
 
 </body>
