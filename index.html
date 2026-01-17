@@ -2,83 +2,53 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>تسجيل دخول</title>
-
+<title>تقديم إدارة</title>
 <style>
 body{
-  font-family: Arial;
-  background: linear-gradient(135deg,#0f172a,#1e293b);
+  margin:0;
+  font-family:Arial;
+  background:#000;
   color:white;
+}
+.center{
+  height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  height:100vh;
 }
 .box{
-  background:#020617;
-  padding:25px;
-  border-radius:15px;
-  width:300px;
-  box-shadow:0 0 20px #38bdf8;
+  background:#202225;
+  padding:30px;
+  width:340px;
+  border-radius:10px;
+  text-align:center;
 }
-input,button{
+.box input, .box textarea, .box button{
   width:100%;
   padding:10px;
   margin:8px 0;
+  border-radius:5px;
   border:none;
-  border-radius:8px;
 }
-input{background:#0f172a;color:white;}
-button{
-  background:#38bdf8;
-  color:black;
-  font-weight:bold;
+.box button{
+  background:#00b06f;
+  color:white;
   cursor:pointer;
 }
-button:hover{background:#0ea5e9;}
-#msg{margin-top:10px;font-weight:bold;}
-.approved{color:#22c55e;}
-.rejected{color:#ef4444;}
-.pending{color:#facc15;}
 </style>
 </head>
-
 <body>
-<div class="box">
-  <h2>تسجيل دخول</h2>
-
-  <form id="f">
-    <input id="name" placeholder="اسم المستخدم" required>
-    <input id="password" type="password" placeholder="كلمة المرور" required>
-    <button type="submit">تسجيل دخول</button>
-  </form>
-
-  <p id="msg"></p>
+<div class="center">
+  <div class="box">
+    <h2>تقديم إدارة</h2>
+    <form action="/apply" method="POST">
+      <input type="text" name="name" placeholder="اسمك" required>
+      <input type="number" name="age" placeholder="عمرك" required>
+      <input type="text" name="discord" placeholder="ديسكوردك" required>
+      <textarea name="reason" placeholder="سبب التقديم" required></textarea>
+      <button type="submit">إرسال</button>
+    </form>
+  </div>
 </div>
-
-<script>
-f.onsubmit = async (e)=>{
- e.preventDefault();
- const res = await fetch("http://localhost:3000/request",{
-  method:"POST",
-  headers:{"Content-Type":"application/json"},
-  body:JSON.stringify({name:name.value,password:password.value})
- });
- const d = await res.json();
- localStorage.setItem("rid",d.id);
- msg.className="pending";
- msg.innerText="⏳ بانتظار المراجعة";
-};
-
-const id=localStorage.getItem("rid");
-if(id){
- fetch("http://localhost:3000/status/"+id)
- .then(r=>r.json())
- .then(d=>{
-  if(d.status=="approved"){msg.className="approved";msg.innerText="✅ تم القبول";}
-  if(d.status=="rejected"){msg.className="rejected";msg.innerText="❌ تم الرفض";}
- });
-}
-</script>
 </body>
 </html>
