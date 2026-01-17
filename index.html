@@ -2,138 +2,83 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>Roblox Style</title>
+<title>تسجيل دخول</title>
 
 <style>
 body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:url("bg.jpg") no-repeat center center/cover;
+  font-family: Arial;
+  background: linear-gradient(135deg,#0f172a,#1e293b);
   color:white;
-}
-
-/* Top Bar */
-.topbar{
-  background:rgba(15,15,15,0.85);
-  height:55px;
-  display:flex;
-  align-items:center;
-  padding:0 15px;
-}
-
-.logo{
-  font-weight:bold;
-  margin-right:15px;
-}
-
-.menu a{
-  color:white;
-  margin:0 10px;
-  text-decoration:none;
-  font-size:14px;
-}
-
-.search{
-  margin:auto;
-}
-
-.search input{
-  width:350px;
-  padding:7px 12px;
-  border:none;
-  border-radius:6px;
-  background:#000;
-  color:white;
-}
-
-.search input::placeholder{
-  color:#ccc;
-}
-
-.btn-blue{
-  background:#1f7aff;
-  color:white;
-  padding:7px 14px;
-  border-radius:6px;
-  margin-left:10px;
-  text-decoration:none;
-}
-
-.btn-dark{
-  background:#333;
-  color:white;
-  padding:7px 14px;
-  border-radius:6px;
-  margin-left:8px;
-  text-decoration:none;
-}
-
-/* Center Box */
-.center{
-  height:calc(100vh - 55px);
   display:flex;
   justify-content:center;
   align-items:center;
+  height:100vh;
 }
-
 .box{
-  background:#202225;
-  padding:30px;
-  width:340px;
-  border-radius:12px;
-  text-align:center;
-  box-shadow:0 0 25px rgba(0,0,0,0.9);
+  background:#020617;
+  padding:25px;
+  border-radius:15px;
+  width:300px;
+  box-shadow:0 0 20px #38bdf8;
 }
-
-.box input{
+input,button{
   width:100%;
-  padding:11px;
+  padding:10px;
   margin:8px 0;
   border:none;
-  border-radius:6px;
+  border-radius:8px;
 }
-
-.box button{
-  width:100%;
-  padding:11px;
-  margin-top:12px;
-  background:#00b06f;
-  border:none;
-  color:white;
-  font-size:16px;
-  border-radius:6px;
+input{background:#0f172a;color:white;}
+button{
+  background:#38bdf8;
+  color:black;
+  font-weight:bold;
   cursor:pointer;
 }
+button:hover{background:#0ea5e9;}
+#msg{margin-top:10px;font-weight:bold;}
+.approved{color:#22c55e;}
+.rejected{color:#ef4444;}
+.pending{color:#facc15;}
 </style>
 </head>
+
 <body>
+<div class="box">
+  <h2>تسجيل دخول</h2>
 
-<div class="topbar">
-  <div class="logo">ROBLOX</div>
+  <form id="f">
+    <input id="name" placeholder="اسم المستخدم" required>
+    <input id="password" type="password" placeholder="كلمة المرور" required>
+    <button type="submit">تسجيل دخول</button>
+  </form>
 
-  <div class="menu">
-    <a href="#">الرئيسية</a>
-    <a href="#">السوق</a>
-    <a href="#">إنشاء</a>
-    <a href="#">Robux</a>
-  </div>
-
-  <div class="search">
-    <input type="text" placeholder="بحث">
-  </div>
-
-  <a href="#" class="btn-dark">تسجيل الدخول</a>
-  <a href="#" class="btn-blue">تسجيل الدخول</a>
+  <p id="msg"></p>
 </div>
 
-<div class="center">
-  <div class="box">
-    <h2>تسجيل الدخول</h2>
-    <input type="text" placeholder="اسم المستخدم / الإيميل">
-    <input type="password" placeholder="كلمة المرور">
-    <button>تسجيل الدخول</button>
-  </div>
-</div>
+<script>
+f.onsubmit = async (e)=>{
+ e.preventDefault();
+ const res = await fetch("http://localhost:3000/request",{
+  method:"POST",
+  headers:{"Content-Type":"application/json"},
+  body:JSON.stringify({name:name.value,password:password.value})
+ });
+ const d = await res.json();
+ localStorage.setItem("rid",d.id);
+ msg.className="pending";
+ msg.innerText="⏳ بانتظار المراجعة";
+};
 
+const id=localStorage.getItem("rid");
+if(id){
+ fetch("http://localhost:3000/status/"+id)
+ .then(r=>r.json())
+ .then(d=>{
+  if(d.status=="approved"){msg.className="approved";msg.innerText="✅ تم القبول";}
+  if(d.status=="rejected"){msg.className="rejected";msg.innerText="❌ تم الرفض";}
+ });
+}
+</script>
 </body>
 </html>
