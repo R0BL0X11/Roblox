@@ -1,65 +1,82 @@
-const express = require("express");
-const nodemailer = require("nodemailer");
-const { v4: uuidv4 } = require("uuid");
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>تسجيل دخول</title>
 
-const app = express();
-app.use(express.json());
+<style>
+body{
+  font-family: Arial;
+  background: linear-gradient(135deg,#0f172a,#1e293b);
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+.box{
+  background:#020617;
+  padding:25px;
+  border-radius:15px;
+  width:300px;
+  box-shadow:0 0 20px #38bdf8;
+}
+input,button{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border:none;
+  border-radius:8px;
+}
+input{background:#0f172a;color:white;}
+button{
+  background:#38bdf8;
+  color:black;
+  font-weight:bold;
+  cursor:pointer;
+}
+button:hover{background:#0ea5e9;}
+#msg{margin-top:10px;font-weight:bold;}
+.approved{color:#22c55e;}
+.rejected{color:#ef4444;}
+.pending{color:#facc15;}
+</style>
+</head>
 
-const PORT = 3000;
+<body>
+<div class="box">
+  <h2>تسجيل دخول</h2>
+  <form id="f">
+    <input id="name" placeholder="اسم المستخدم" required>
+    <input id="email" type="email" placeholder="الإيميل" required>
+    <button type="submit">تسجيل دخول</button>
+  </form>
+  <p id="msg"></p>
+</div>
 
-// إيميلك
-const ADMIN_EMAIL = "battal.alzahrani23@gmail.com";
-// حط هنا App Password من جيميل (مو كلمة مرور حسابك!)
-const APP_PASSWORD = "PUT_YOUR_APP_PASSWORD_HERE";
+<script>
+f.onsubmit = async (e)=>{
+ e.preventDefault();
+ const res = await fetch("http://localhost:3000/request",{
+  method:"POST",
+  headers:{"Content-Type":"application/json"},
+  body:JSON.stringify({name:name.value,email:email.value})
+ });
+ const d = await res.json();
+ localStorage.setItem("rid",d.id);
+ msg.className="pending";
+ msg.innerText="⏳ بانتظار المراجعة";
+};
 
-const requests = {};
-
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: ADMIN_EMAIL,
-    pass: APP_PASSWORD
-  }
-});
-
-app.post("/request", (req, res) => {
-  const id = uuidv4();
-  requests[id] = { ...req.body, status: "pending" };
-
-  const approve = `http://localhost:${PORT}/approve/${id}`;
-  const reject  = `http://localhost:${PORT}/reject/${id}`;
-
-  transporter.sendMail({
-    to: ADMIN_EMAIL,
-    subject: "طلب جديد",
-    html: `
-      <h3>طلب جديد</h3>
-      <p>الاسم: ${req.body.name}</p>
-      <p>الإيميل: ${req.body.email}</p>
-      <a href="${approve}">✅ قبول</a><br><br>
-      <a href="${reject}">❌ رفض</a>
-    `
-  });
-
-  res.json({ id });
-});
-
-app.get("/approve/:id", (req, res) => {
-  if (requests[req.params.id])
-    requests[req.params.id].status = "approved";
-  res.send("تم القبول");
-});
-
-app.get("/reject/:id", (req, res) => {
-  if (requests[req.params.id])
-    requests[req.params.id].status = "rejected";
-  res.send("تم الرفض");
-});
-
-app.get("/status/:id", (req, res) => {
-  res.json(requests[req.params.id] || { status: "not_found" });
-});
-
-app.listen(PORT, () => {
-  console.log("Server running on http://localhost:" + PORT);
-});
+const id=localStorage.getItem("rid");
+if(id){
+ fetch("http://localhost:3000/status/"+id)
+ .then(r=>r.json())
+ .then(d=>{
+  if(d.status=="approved"){msg.className="approved";msg.innerText="✅ تم القبول";}
+  if(d.status=="rejected"){msg.className="rejected";msg.innerText="❌ تم الرفض";}
+ });
+}
+</script>
+</body>
+</html>
