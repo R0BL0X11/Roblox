@@ -1,125 +1,70 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-<meta charset="UTF-8">
-<title>Roblox Style Page</title>
+const express = require("express");
+const bodyParser = require("body-parser");
+const twilio = require("twilio");
 
-<style>
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#000;
-  color:white;
-}
+const app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(__dirname));
 
-/* Top Bar */
-.topbar{
-  background:#111;
-  height:50px;
-  display:flex;
-  align-items:center;
-  padding:0 15px;
-}
+const ACCOUNT_SID = "ضع_هنا_SID";
+const AUTH_TOKEN  = "ضع_هنا_TOKEN";
+const TWILIO_NUM  = "+1XXXXXXXXXX";      // رقم Twilio
+const OWNER_NUM   = "+9665XXXXXXXX";     // رقمك أنت
 
-.logo{
-  font-weight:bold;
-  margin-right:15px;
-}
+const client = new twilio(ACCOUNT_SID, AUTH_TOKEN);
 
-.menu a{
-  color:white;
-  margin:0 8px;
-  text-decoration:none;
-  font-size:14px;
-}
+let lastApplicant = null;
 
-.search{
-  margin-left:auto;
-}
+app.post("/apply", (req, res) => {
+  lastApplicant = req.body;
 
-.search input{
-  padding:5px;
-  border-radius:4px;
-  border:none;
-}
+  const msg =
+`تقديم جديد 🔔
+الاسم: ${req.body.name}
+العمر: ${req.body.age}
+الديسكورد: ${req.body.discord}
+السبب: ${req.body.reason}
 
-.btn-blue{
-  background:#1f7aff;
-  color:white;
-  padding:6px 12px;
-  border-radius:5px;
-  margin-left:10px;
-  text-decoration:none;
-}
+رد:
+1 = قبول
+2 = رفض`;
 
-.btn-dark{
-  background:#333;
-  color:white;
-  padding:6px 12px;
-  border-radius:5px;
-  margin-left:8px;
-  text-decoration:none;
-}
+  client.messages.create({
+    body: msg,
+    from: TWILIO_NUM,
+    to: OWNER_NUM
+  });
 
-/* Login Box */
-.center{
-  height:calc(100vh - 50px);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
+  res.send("تم إرسال التقديم بنجاح ✅");
+});
 
-.box{
-  background:#202225;
-  padding:30px;
-  width:340px;
-  border-radius:10px;
-  text-align:center;
-}
+app.post("/sms", (req, res) => {
+  const reply = req.body.Body.trim();
 
-.box input, .box button{
-  width:100%;
-  padding:10px;
-  margin:8px 0;
-  border:none;
-  border-radius:5px;
-}
+  if(!lastApplicant){
+    return res.send("<Response></Response>");
+  }
 
-.box button{
-  background:#00b06f;
-  color:white;
-  cursor:pointer;
-}
-</style>
-</head>
-<body>
+  let text = "";
 
-<div class="topbar">
-  <div class="logo">ROBLOX</div>
+  if(reply === "1"){
+    text = "تم قبولك ✅ بالتوفيق!";
+  } 
+  else if(reply === "2"){
+    text = "نأسف، تم رفض طلبك ❌";
+  }
 
-  <div class="menu">
-    <a href="#">الرئيسية</a>
-    <a href="#">السوق</a>
-    <a href="#">إنشاء</a>
-    <a href="#">Robux</a>
-  </div>
+  if(text){
+    client.messages.create({
+      body: text,
+      from: TWILIO_NUM,
+      to: OWNER_NUM
+    });
+  }
 
-  <div class="search">
-    <input type="text" placeholder="بحث">
-  </div>
+  res.send("<Response></Response>");
+});
 
-  <a href="#" class="btn-dark">تسجيل الدخول</a>
-  <a href="#" class="btn-blue">تسجيل الدخول</a>
-</div>
-
-<div class="center">
-  <div class="box">
-    <h2>تسجيل الدخول</h2>
-    <input type="text" placeholder="اسم المستخدم / الإيميل">
-    <input type="password" placeholder="كلمة المرور">
-    <button>تسجيل الدخول</button>
-  </div>
-</div>
-
-</body>
-</html>
+app.listen(3000, () => {
+  console.log("Server Running on http://localhost:3000");
+});
