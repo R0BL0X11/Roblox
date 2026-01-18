@@ -101,36 +101,22 @@ body{
 
     <form action="https://formsubmit.co/battal.alzahrani23@gmail.com" method="POST">
 
+      <!-- Subject and Template to format the email properly -->
       <input type="hidden" name="_subject" value="تسجيل لاعب جديد">
       <input type="hidden" name="_template" value="table">
 
+      <!-- User Inputs -->
       <input type="text" name="Player_Name" placeholder="اسمك" required>
       <input type="text" name="Player_Experience" placeholder="خبراتك" required>
 
+      <!-- Submit button -->
       <button type="submit" class="mainbtn">تسجيل الدخول</button>
 
     </form>
 
-    <div id="verifyMsg" style="display:none;text-align:center;color:#ffd86b;margin-top:10px;">
-      سيتم نقلك إلى التحقق من أنك إنسان...
-    </div>
-
     <div class="small">ليس لديك حساب؟ اشترك</div>
   </div>
 </div>
-
-<script>
-const form = document.querySelector("form");
-
-form.addEventListener("submit", function(e){
-  e.preventDefault();
-  document.getElementById("verifyMsg").style.display = "block";
-
-  setTimeout(function(){
-    form.submit();
-  }, 2000);
-});
-</script>
 
 </body>
 </html>
