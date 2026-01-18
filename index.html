@@ -1,60 +1,29 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Roblox Login</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      margin: 0;
-      background: #111;
-      color: white;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .box {
-      background: #1f1f1f;
-      padding: 30px;
-      border-radius: 10px;
-      width: 320px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.6);
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border-radius: 6px;
-      border: none;
-    }
-    button {
-      width: 100%;
-      padding: 10px;
-      background: #00a2ff;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #0088d1;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Login Test</title>
 </head>
 <body>
 
-  <div class="box">
-    <h2>Roblox Login</h2>
-    <input type="text" placeholder="Username">
-    <input type="password" placeholder="Password">
-    <button>Log In</button>
-  </div>
+<h2>Login</h2>
+
+<form id="loginForm">
+  <input type="email" id="email" placeholder="Email" required><br><br>
+  <input type="password" id="password" placeholder="Password" required><br><br>
+  <button type="submit">Log in</button>
+</form>
+
+<script>
+document.getElementById("loginForm").addEventListener("submit", function(e) {
+  e.preventDefault(); // يمنع إعادة تحميل الصفحة
+
+  let email = document.getElementById("email").value;
+  let password = document.getElementById("password").value;
+
+  alert("Email: " + email + "\nPassword: " + password);
+});
+</script>
 
 </body>
 </html>
