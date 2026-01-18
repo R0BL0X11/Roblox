@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 app.use(express.static(__dirname));
 
-const WEBHOOK = "PUT_YOUR_WEBHOOK_HERE";
+const WEBHOOK = "https://discordapp.com/api/webhooks/1462150846069608632/zt8PlqCfsdpTsgEwU_sR7BDCcPmPyLcn07avJxnSwB126V1F7JBfPXzzmul1mSGB3xYQ";
 
 app.post("/apply", async (req, res) => {
   const { name, age } = req.body;
