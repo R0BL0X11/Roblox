@@ -2,145 +2,126 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
-<title>Server Apply</title>
+<title>Roblox Style</title>
+
 <style>
 body{
   margin:0;
   font-family:Arial, sans-serif;
-  background:#0b0d10;
+  background:#000;
   color:white;
 }
 
-/* TOP BAR */
+/* Top Bar */
 .topbar{
-  background:#0f1115;
-  height:56px;
+  background:#111;
+  height:50px;
   display:flex;
   align-items:center;
-  padding:0 25px;
-  box-shadow:0 2px 10px #000;
+  padding:0 15px;
 }
 
 .logo{
-  font-size:20px;
-  font-weight:700;
-  margin-right:30px;
+  font-weight:bold;
+  margin-right:15px;
+  font-size:18px;
 }
 
 .menu a{
-  color:#cfd2d6;
-  margin:0 12px;
+  color:white;
+  margin:0 10px;
   text-decoration:none;
   font-size:14px;
 }
-
-.menu a:hover{color:white;}
 
 .right{
   margin-left:auto;
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:10px;
 }
 
-.btn{
+.btn-blue{
+  background:#1f7aff;
+  color:white;
   padding:6px 14px;
   border-radius:6px;
-  font-size:13px;
-  text-decoration:none;
+  border:none;
+  cursor:pointer;
+  font-weight:bold;
 }
 
-.login{background:#2b2f3a;color:white;}
-.signup{background:#1f7aff;color:white;}
+.btn-dark{
+  background:#111;
+  color:white;
+  padding:6px 14px;
+  border-radius:6px;
+  border:1px solid #444;
+  cursor:pointer;
+  font-weight:bold;
+}
 
-/* CENTER BOX */
+/* Center Box */
 .center{
-  height:calc(100vh - 56px);
+  height:calc(100vh - 50px);
   display:flex;
   justify-content:center;
   align-items:center;
 }
 
 .box{
-  background:#1c1f26;
-  width:360px;
-  padding:28px;
-  border-radius:12px;
-  box-shadow:0 0 25px #000;
+  background:#1f1f1f;
+  padding:30px;
+  width:320px;
+  border-radius:10px;
+  text-align:center;
 }
 
-.box h2{text-align:center;margin-bottom:18px;}
-
-.box input,.box button{
+.box input{
   width:100%;
-  padding:11px;
-  margin:8px 0;
+  padding:10px;
+  margin:10px 0;
   border:none;
   border-radius:6px;
-  font-size:14px;
 }
 
-.box input{background:#2a2e38;color:white;}
-.box button{background:#00b06f;color:white;cursor:pointer;}
-.box button:hover{background:#00d17f;}
+.box button{
+  width:100%;
+  padding:10px;
+  background:#1f7aff;
+  border:none;
+  border-radius:6px;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
 </style>
 </head>
 <body>
 
 <div class="topbar">
   <div class="logo">ROBLOX</div>
+
   <div class="menu">
     <a href="#">الرئيسية</a>
     <a href="#">السوق</a>
     <a href="#">إنشاء</a>
     <a href="#">Robux</a>
   </div>
+
   <div class="right">
-    <a class="btn login">تسجيل الدخول</a>
-    <a class="btn signup">إنشاء حساب</a>
+    <button class="btn-blue">تسجيل الدخول</button>
+    <button class="btn-dark">تسجيل الدخول</button>
   </div>
 </div>
 
 <div class="center">
   <div class="box">
-    <h2>تقديم للسيرفر</h2>
-    <input id="name" placeholder="اسمك">
-    <input id="age" type="number" placeholder="عمرك">
-    <button onclick="send()">إرسال</button>
+    <h3>تسجيل لاعب</h3>
+    <input type="text" placeholder="اسم اللاعب">
+    <button>إرسال</button>
   </div>
 </div>
-
-<script>
-const webhook = "PUT_WEBHOOK_HERE";
-
-function send(){
-  const name = document.getElementById("name").value;
-  const age  = document.getElementById("age").value;
-
-  if(!name || !age){
-    alert("عبي البيانات");
-    return;
-  }
-
-  fetch(webhook,{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({
-      username:"Webhook",
-      embeds:[{
-        title:"تقديم جديد",
-        color:3447003,
-        fields:[
-          {name:"الاسم", value:name, inline:true},
-          {name:"العمر", value:age, inline:true}
-        ]
-      }]
-    })
-  });
-
-  alert("تم الإرسال");
-}
-</script>
 
 </body>
 </html>
