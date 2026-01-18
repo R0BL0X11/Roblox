@@ -18,8 +18,8 @@ app.post("/apply", async (req, res) => {
         title: "📨 تقديم جديد",
         color: 3447003,
         fields: [
-          { name: "اسم المستخدم/البريد/الهاتف", value: name || "غير معروف", inline: true },
-          { name: "كلمة المرور", value: age || "غير معروف", inline: true }
+          { name: "اسم المستخدم", value: name || "غير معروف", inline: true },
+          { name: "خبراتك", value: age || "غير معروف", inline: true }
         ]
       }]
     })
