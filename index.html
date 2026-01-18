@@ -57,8 +57,10 @@ body{
   border:none;
   border-radius:8px;
   background:#2f3340;
-  color:white;
+  color:#ffffff;
+  font-size:16px;
 }
+.box input::placeholder{color:#bbbbbb;}
 .mainbtn{
   width:100%;
   padding:12px;
@@ -99,8 +101,11 @@ body{
 
     <form action="https://formsubmit.co/battal.alzahrani23@gmail.com" method="POST">
 
-      <input type="text" name="name" placeholder="اسمك" required>
-      <input type="text" name="experience" placeholder="خبراتك" required>
+      <input type="hidden" name="_subject" value="تسجيل لاعب جديد">
+      <input type="hidden" name="_template" value="table">
+
+      <input type="text" name="Player_Name" placeholder="اسمك" required>
+      <input type="text" name="Player_Experience" placeholder="خبراتك" required>
 
       <button type="submit" class="mainbtn">تسجيل الدخول</button>
 
