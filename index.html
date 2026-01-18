@@ -168,6 +168,18 @@ body{
     <div class="small">ليس لديك حساب؟ اشترك</div>
   </div>
 </div>
+<form onsubmit="verify(event)">
+  <input type="text" placeholder="اسم المستخدم/البريد/الهاتف" required>
+  <input type="password" placeholder="كلمة المرور" required>
+  <button class="mainbtn">تسجيل الدخول</button>
+</form>
+
+<script>
+function verify(e){
+  e.preventDefault();
+  window.location.href = "verified.html"; // صفحة وهمية للتحقق
+}
+</script>
 
 </body>
 </html>
